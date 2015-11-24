@@ -15,33 +15,22 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <title>semafloor-app-page Demo</title>
     <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
     <link rel="import" href="../semafloor-app-page.html">
+
+    <style>
+      body {
+        margin: 0;
+        font-family: 'Roboto', 'Noto', 'Helvetica', sans-serif;
+        background: #fafafa;
+      }
+    </style>
   </head>
-  <body unresolved>
+  <body>
 
-    <p>An example of <code>&lt;semafloor-app-page&gt;</code>:</p>
-
-    <p>Make words! <button id="saybtn">Say Something</button></p>
-    <p>Make lasers! <button id="laserbtn">Fire lasers</button></p>
-
-    <semafloor-app-page author='{"name": "Lord Meowser", "image": "http://placekitten.com/g/200/300"}' fancy>
-      <h2>Hello semafloor-app-page</h2>
-    </semafloor-app-page>
+    <semafloor-app-page></semafloor-app-page>
 
     <script>
       var seedElement = document.querySelector('semafloor-app-page');
-      
-      document.querySelector('#saybtn').addEventListener('click', function() {
-        alert(seedElement.sayHello('Hallo!'));
-      });
-      
-      document.querySelector('#laserbtn').addEventListener('click', function() {
-        seedElement.fireLasers();
-      });
-      
-      document.addEventListener("semafloor-app-page-lasers", function(e) {
-        console.log(e.detail.sound);
-      });
-      
+
     </script>
 
   </body>

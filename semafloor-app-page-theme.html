@@ -1,0 +1,79 @@
+<link rel="import" href="../polymer/polymer.html">
+
+<dom-module id="semafloor-app-page-theme">
+  <template>
+    <style>
+      :host {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -o-user-select: none;
+        user-select: none;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+
+        --app-primary-color: #f5f5f5;
+
+        display: block;
+        @apply(--layout-vertical);
+        @apply(--layout-flex-auto);
+      }
+
+      *, *::before, *::after {
+        box-sizing: inherit;
+      }
+
+      app-drawer-layout {
+        --app-drawer-background-color: var(--app-primary-color, #009688);
+      }
+
+      [drawer] app-header {
+        /*background-color: #009688;*/
+        background-color: #4caf50;
+        color: #fff;
+        text-align: center;
+      }
+
+      .nav-menu {
+        background-color: var(--app-primary-color, #009688);
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+        font-size: inherit;
+      }
+
+      .nav-menu > a {
+        display: block;
+        padding: 12px 16px;
+        font-size: 20px;
+        font-weight: 500px;
+      }
+
+      .nav-menu > a.iron-selected {
+        background-color: #ffffff;
+      }
+
+      [main] app-header {
+        /*background-color: #009688;*/
+        background-color: #4caf50;
+        color: #fff;
+      }
+
+      [main] app-header > .main-panel-toolbar {
+        /*background-color: #009688;*/
+        background-color: #4caf50;
+        color: #fff;
+      }
+
+      /*[main] app-header app-toolbar+app-toolbar {
+        height: 128px;
+      }*/
+
+
+    </style>
+
+  </template>
+</dom-module>
