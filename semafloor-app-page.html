@@ -11,6 +11,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="semafloor-app-page-theme.html">
 
 <link rel="import" href="../semafloor-profile-page/semafloor-profile-page.html">
+<link rel="import" href="../semafloor-search-page/semafloor-search-page.html">
 
 <link rel="import" href="../iron-icons/iron-icons.html">
 <link rel="import" href="../iron-pages/iron-pages.html">
@@ -37,7 +38,7 @@ Example:
 -->
 <dom-module id="semafloor-app-page">
 
-  <template>
+  <template strip-whitespace>
     <style include="semafloor-app-page-theme"></style>
 
     <app-drawer-layout drawer-position="left">
@@ -102,6 +103,7 @@ Example:
               </p>
             </div>
             <semafloor-profile-page name="profile"></semafloor-profile-page>
+            <semafloor-search-page name="search"></semafloor-search-page>
           </iron-pages>
         </div>
       </app-header-layout>
@@ -155,7 +157,7 @@ Example:
       },
       page: {
         type: String,
-        value: 'profile'
+        value: 'search'
       },
 
 

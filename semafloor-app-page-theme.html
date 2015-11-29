@@ -1,7 +1,7 @@
 <link rel="import" href="../polymer/polymer.html">
 
 <dom-module id="semafloor-app-page-theme">
-  <template>
+  <template strip-whitespace>
     <style>
       :host {
         -webkit-user-select: none;
@@ -21,7 +21,8 @@
       }
 
       *, *::before, *::after {
-        box-sizing: inherit;
+        /*box-sizing: inherit;*/
+        box-sizing: border-box;
       }
 
       app-drawer-layout {
