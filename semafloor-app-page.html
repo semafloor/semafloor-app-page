@@ -13,6 +13,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../semafloor-profile-page/semafloor-profile-page.html">
 <link rel="import" href="../semafloor-search-page/semafloor-search-page.html">
 <link rel="import" href="../semafloor-reserve-page/semafloor-reserve-page.html">
+<link rel="import" href="../semafloor-current-page/semafloor-current-page.html">
 
 <link rel="import" href="../iron-icons/iron-icons.html">
 <link rel="import" href="../iron-pages/iron-pages.html">
@@ -120,6 +121,7 @@ Example:
             <semafloor-profile-page name="profile"></semafloor-profile-page>
             <semafloor-search-page name="search"></semafloor-search-page>
             <semafloor-reserve-page id="reservePage" name="reserve" page="[[_reserveTabs]]" today-count="{{_todayCount}}" thisweek-count="{{_thisweekCount}}" upcoming-count="{{_upcomingCount}}"></semafloor-reserve-page>
+            <semafloor-current-page name="current"></semafloor-current-page>
           </iron-pages>
         <!-- </div> -->
       </app-header-layout>
@@ -141,7 +143,7 @@ Example:
       },
       page: {
         type: String,
-        value: 'profile'
+        value: 'current'
       },
 
       _todayCount: Number,
