@@ -16,6 +16,7 @@
         --app-primary-color: #f5f5f5;
 
         display: block;
+        @apply(--paper-font-common-base);
         @apply(--layout-vertical);
         @apply(--layout-flex-auto);
       }
@@ -29,55 +30,43 @@
         --app-drawer-background-color: var(--app-primary-color, #009688);
       }
 
-      [drawer] app-header {
-        /*background-color: #009688;*/
-        background-color: #4caf50;
-        color: #fff;
+      [drawer] app-toolbar {
         text-align: center;
+      }
+      app-toolbar {
+        /*background-color: #009688;*/
+        /*background-color: #4caf50;*/
+        background-color: #607D8B;
+        color: #fff;
       }
 
       .nav-menu {
         background-color: var(--app-primary-color, #009688);
       }
-
       a {
         text-decoration: none;
         color: inherit;
         font-size: inherit;
       }
-
       .nav-menu > a {
         display: block;
         padding: 12px 16px;
         font-size: 20px;
         font-weight: 500px;
       }
-
       .nav-menu > a.iron-selected {
-        background-color: #ffffff;
+        background-color: #fff;
       }
 
-      [main] app-header {
-        /*background-color: #009688;*/
-        /*background-color: #4caf50;*/
-        /*background-color: #607D8B;
-        color: #fff;*/
+      /* to make layout flex (for room-page) */
+      app-header-layout::content > #contentContainer {
+        @apply(--layout);
+        @apply(--layout-flex-auto);
       }
-
-      [main] app-header > .main-panel-toolbar {
-        /*background-color: #009688;*/
-        /*background-color: #4caf50;
-        color: #fff;*/
+      iron-pages {
+        @apply(--layout);
+        @apply(--layout-flex-auto);
       }
-
-      app-toolbar {
-        background-color: #607D8B;
-        color: #fff;
-      }
-
-      /*[main] app-header app-toolbar+app-toolbar {
-        height: 128px;
-      }*/
 
       /* semafloor-reserve-page styling */
       paper-tab span {
@@ -93,7 +82,11 @@
         --paper-badge-margin-bottom: 16px;
       }
 
-
+      /* semafloor-room-page styling */
+      semafloor-room-page {
+        @apply(--layout);
+        @apply(--layout-flex-auto);
+      }
 
 
     </style>
