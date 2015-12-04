@@ -59,19 +59,41 @@
 
       [main] app-header {
         /*background-color: #009688;*/
-        background-color: #4caf50;
-        color: #fff;
+        /*background-color: #4caf50;*/
+        /*background-color: #607D8B;
+        color: #fff;*/
       }
 
       [main] app-header > .main-panel-toolbar {
         /*background-color: #009688;*/
-        background-color: #4caf50;
+        /*background-color: #4caf50;
+        color: #fff;*/
+      }
+
+      app-toolbar {
+        background-color: #607D8B;
         color: #fff;
       }
 
       /*[main] app-header app-toolbar+app-toolbar {
         height: 128px;
       }*/
+
+      /* semafloor-reserve-page styling */
+      paper-tab span {
+        text-align: center;
+        text-transform: uppercase;
+      }
+      paper-badge {
+        --paper-badge-margin-left: -6px;
+        --paper-badge-background: #1DDBD8;
+        --paper-badge-text-color: #607d8b;
+      }
+      paper-badge[for=thisweekTab] {
+        --paper-badge-margin-bottom: 16px;
+      }
+
+
 
 
     </style>

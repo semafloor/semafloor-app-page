@@ -12,12 +12,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <link rel="import" href="../semafloor-profile-page/semafloor-profile-page.html">
 <link rel="import" href="../semafloor-search-page/semafloor-search-page.html">
+<link rel="import" href="../semafloor-reserve-page/semafloor-reserve-page.html">
 
 <link rel="import" href="../iron-icons/iron-icons.html">
 <link rel="import" href="../iron-pages/iron-pages.html">
 
 <link rel="import" href="../paper-button/paper-button.html">
 <link rel="import" href="../paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../paper-tabs/paper-tabs.html">
+<link rel="import" href="../paper-badge/paper-badge.html">
 
 <link rel="import" href="../app-layout/app-drawer-layout/app-drawer-layout.html">
 <link rel="import" href="../app-layout/app-header-layout/app-header-layout.html">
@@ -41,7 +44,7 @@ Example:
   <template strip-whitespace>
     <style include="semafloor-app-page-theme"></style>
 
-    <app-drawer-layout drawer-position="left">
+    <app-drawer-layout drawer-position="left" fullbleed>
 
       <!-- nav panel -->
       <app-header-layout drawer has-scrolling-region>
@@ -77,7 +80,7 @@ Example:
       </app-header-layout>
 
       <!-- main panel -->
-      <app-header-layout main>
+      <app-header-layout main has-scrolling-region>
         <app-header id="mainHeader" waterfall condenses>
           <!-- top toolbar -->
           <app-toolbar>
@@ -87,14 +90,26 @@ Example:
 
           <!-- bottom toolbar -->
           <app-toolbar class="main-panel-toolbar">
-            <div class="" title>
-              App name
-            </div>
+            <paper-tabs bottom-item selected="{{_reserveTabs}}" attr-for-selected="name" on-iron-deselect="_onIronDeselect" hidden$="[[_isReservePage(page, 'reserve')]]">
+              <paper-tab name="today">
+                <span id="todayTab">today</span>
+                <paper-badge for="todayTab" label="[[_todayCount]]"></paper-badge>
+              </paper-tab>
+              <paper-tab name="thisweek">
+                <!-- split long sentence into two lines, from MD's specs -->
+                <span>this<br><span id="thisweekTab">week</span></span>
+                <paper-badge for="thisweekTab" label="[[_thisweekCount]]"></paper-badge>
+              </paper-tab>
+              <paper-tab name="upcoming">
+                <span id="upcomingTab">upcoming</span>
+                <paper-badge for="upcomingTab" label="[[_upcomingCount]]"></paper-badge>
+              </paper-tab>
+            </paper-tabs>
           </app-toolbar>
 
         </app-header>
 
-        <div class="">
+        <!-- <div class=""> -->
           <iron-pages selected="[[page]]" attr-for-selected="name">
             <div name="main">
               <h1>Page One</h1>
@@ -104,8 +119,9 @@ Example:
             </div>
             <semafloor-profile-page name="profile"></semafloor-profile-page>
             <semafloor-search-page name="search"></semafloor-search-page>
+            <semafloor-reserve-page id="reservePage" name="reserve" page="[[_reserveTabs]]" today-count="{{_todayCount}}" thisweek-count="{{_thisweekCount}}" upcoming-count="{{_upcomingCount}}"></semafloor-reserve-page>
           </iron-pages>
-        </div>
+        <!-- </div> -->
       </app-header-layout>
     </app-drawer-layout>
   </template>
@@ -119,53 +135,32 @@ Example:
     is: 'semafloor-app-page',
 
     properties: {
-
-      /**
-       * `fancy` indicates that the element should don a monocle and tophat,
-       * while checking its pocket watch.
-       */
-      fancy: Boolean,
-
-      /**
-       * Describes the author of the element, but is really just an excuse to
-       * show off JSDoc annotations.
-       *
-       * @type {{name: string, image: string}}
-       */
-      author: {
-        type: Object,
-        // Use `value` to provide a default value for a property, by setting it
-        // on your element's prototype.
-        //
-        // If you provide a function, as we do here, Polymer will call that
-        // _per element instance_.
-        //
-        // We do that to ensure that each element gets its own copy of the
-        // value, rather than having it shared across all instances (via the
-        // prototype).
-        value: function() {
-          return {
-            name:  'Dimitri Glazkov',
-            image: 'http://addyosmani.com/blog/wp-content/uploads/2013/04/unicorn.jpg',
-          };
-        }
-      },
-
       category: {
         type: String,
         value: 'profile'
       },
       page: {
         type: String,
-        value: 'search'
+        value: 'profile'
       },
 
+      _todayCount: Number,
+      _thisweekCount: Number,
+      _upcomingCount: Number,
+      _reserveTabs: {
+        type: String,
+        value: 'today'
+      },
 
     },
 
     listeners: {
       'app-header-transform': '_onAppHeaderTransform'
     },
+
+    observers: [
+      '_isReservePage(page)'
+    ],
 
     // Element Lifecycle
 
@@ -194,36 +189,6 @@ Example:
       // Use this to clean up anything you did in `attached`.
     },
 
-    // Element Behavior
-
-    /**
-     * The `semafloor-app-page-lasers` event is fired whenever `fireLasers` is called.
-     *
-     * @event semafloor-app-page-lasers
-     * @detail {{sound: String}}
-     */
-
-    /**
-     * Sometimes it's just nice to say hi.
-     *
-     * @param {string} greeting A positive greeting.
-     * @return {string} The full greeting.
-     */
-    sayHello: function(greeting) {
-      var response = greeting || 'Hello World!';
-      return 'semafloor-app-page says, ' + response;
-    },
-
-    /**
-     * Attempt to destroy this element's enemies with a beam of light!
-     *
-     * Or, at least, dispatch an event in the vain hope that someone else will
-     * do the zapping.
-     */
-    fireLasers: function() {
-      this.fire('semafloor-app-page-lasers', {sound: 'Pew pew!'});
-    },
-
     // workaround when bottom toolbar in app-header is greater than the top toolbar.
     _onAppHeaderTransform: function (ev) {
       // var d = ev.detail;
@@ -232,6 +197,17 @@ Example:
       // }else {
       //   this.transform('translate3d(0, -' + d.y + 'px, 0)', this.$.mainHeader);
       // }
+    },
+
+    // hide page overflow when switching between pages.
+    _onIronDeselect: function (ev) {
+      this.$.reservePage.hideOverflow();
+    },
+
+    _isReservePage: function (_page, _isReserve) {
+      console.log(_page);
+      console.log('haha');
+      return _page !== _isReserve;
     },
 
   });
