@@ -81,11 +81,12 @@ Example:
           <app-toolbar>
             <!-- menu button -->
             <paper-icon-button icon="icons:menu" drawer-toggle aria-label="menu"></paper-icon-button>
+            <span hidden$="[[_isReservePage(page, 'reserve')]]">[[_pageTitle]]</span>
           </app-toolbar>
 
           <!-- bottom toolbar -->
           <app-toolbar>
-            <span>[[_pageTitle]]</span>
+            <span hidden$="[[!_isReservePage(page, 'reserve')]]">[[_pageTitle]]</span>
             <paper-tabs bottom-item selected="{{_reserveTabs}}" attr-for-selected="name" on-iron-deselect="_onIronDeselect" hidden$="[[_isReservePage(page, 'reserve')]]">
               <paper-tab name="today">
                 <span id="todayTab">today</span>
