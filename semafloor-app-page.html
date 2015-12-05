@@ -155,6 +155,12 @@ Example:
         type: String,
         value: 'today'
       },
+      /**
+       * Signal to the outside world that this element
+       * has been upgraded. Set in ready.
+       * https://github.com/Polymer/polymer/issues/2653
+       */
+      upgraded: Boolean,
 
     },
 
@@ -175,6 +181,11 @@ Example:
       //
       // This is the point where you should make modifications to the DOM (when
       // necessary), or kick off any processes the element wants to perform.
+
+      // Let the world know we're ready to receive data
+      // https://github.com/Polymer/polymer/2653
+      this.fire('upgraded');
+      this.upgraded = true;
     },
 
     attached: function() {
