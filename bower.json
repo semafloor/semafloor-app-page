@@ -27,7 +27,8 @@
     "paper-tabs": "PolymerElements/paper-tabs#~1.2.3",
     "paper-badge": "PolymerElements/paper-badge#~1.1.1",
     "semafloor-current-page": "semafloor/semafloor-current-page",
-    "semafloor-room-page": "semafloor/semafloor-room-page"
+    "semafloor-room-page": "semafloor/semafloor-room-page",
+    "semafloor-profile-page": "semafloor/semafloor-profile-page#~0.1.0"
   },
   "devDependencies": {
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
