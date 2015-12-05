@@ -52,32 +52,25 @@ Example:
       <app-header-layout drawer has-scrolling-region>
         <app-header fixed>
           <!-- top toolbar -->
-          <app-toolbar>
-            <div class="">
-            </div>
-          </app-toolbar>
-
-          <!-- middle toolbar -->
-          <app-toolbar>
-            <div class="">
-            </div>
-          </app-toolbar>
-
+          <app-toolbar></app-toolbar>
           <!-- bottom toolbar -->
           <app-toolbar>
-            <div class="" title>
-              Semafloor
-            </div>
+            <span>Semafloor</span>
           </app-toolbar>
         </app-header>
 
         <!-- nav menu -->
-        <iron-selector class="nav-menu" selected="[[category]]" attr-for-selected="name">
-          <a name="profile" href="/profile/list">My Profile</a>
+        <iron-selector class="nav-menu" selected="[[category]]" attr-for-selected="name" on-tap="_switchPage">
+          <div class="pseudo-a" name="profile">My Profile</div>
+          <div class="pseudo-a" name="reserve">My Reservations</div>
+          <div class="pseudo-a" name="search">Search &amp; Reserve</div>
+          <div class="pseudo-a" name="current">Current Reservations</div>
+          <div class="pseudo-a" name="room">Room Information</div>
+          <!-- <a name="profile" href="/profile/list" on-tap="_switchPage">My Profile</a>
           <a name="reserve" href="/reserve/list">My Reservations</a>
           <a name="search" href="/search/list">Search &amp; Reserve</a>
           <a name="current" href="/current/list">Current Reservations</a>
-          <a name="room" href="/room/list">Room Information</a>
+          <a name="room" href="/room/list">Room Information</a> -->
         </iron-selector>
       </app-header-layout>
 
@@ -87,11 +80,12 @@ Example:
           <!-- top toolbar -->
           <app-toolbar>
             <!-- menu button -->
-            <paper-icon-button icon="menu" drawer-toggle aria-label="menu"></paper-icon-button>
+            <paper-icon-button icon="icons:menu" drawer-toggle aria-label="menu"></paper-icon-button>
           </app-toolbar>
 
           <!-- bottom toolbar -->
           <app-toolbar>
+            <span>[[_pageTitle]]</span>
             <paper-tabs bottom-item selected="{{_reserveTabs}}" attr-for-selected="name" on-iron-deselect="_onIronDeselect" hidden$="[[_isReservePage(page, 'reserve')]]">
               <paper-tab name="today">
                 <span id="todayTab">today</span>
@@ -111,7 +105,7 @@ Example:
         </app-header>
 
         <!-- <div class=""> -->
-          <iron-pages selected="[[page]]" attr-for-selected="name">
+          <iron-pages id="ironPages" selected="[[page]]" attr-for-selected="name">
             <semafloor-profile-page name="profile"></semafloor-profile-page>
             <div name="main">
               <h1>Page One</h1>
@@ -132,6 +126,8 @@ Example:
 </dom-module>
 
 <script>
+  var _pageTitles = ['My Profile','My Reservations','Search & Reserve','Current Reservations','Room Information'];
+  var _pageTitlesCodes = ['profile','reserve','search','current','room'];
 
   Polymer({
 
@@ -154,6 +150,7 @@ Example:
         type: String,
         value: 'today'
       },
+      _pageTitle: String,
       /**
        * Signal to the outside world that this element
        * has been upgraded. Set in ready.
@@ -222,6 +219,23 @@ Example:
       console.log(_page);
       console.log('haha');
       return _page !== _isReserve;
+    },
+
+    _switchPage: function (ev) {
+      var _target = ev.target;
+
+      while (_target && _target.tagName !== 'DIV') {
+        _target = _target.parentElement;
+      }
+
+      if (_target && _target.hasAttribute('name')) {
+        var _name = _target.getAttribute('name');
+        var _pageIdx = _pageTitlesCodes.indexOf(_name);
+        // set page title as switching to a page.
+        this.set('_pageTitle', _pageTitles[_pageIdx]);
+        // then, swtich page.
+        this.$.ironPages.select(_name);
+      }
     },
 
   });

@@ -40,6 +40,10 @@
       app-drawer-layout {
         --app-drawer-background-color: var(--app-primary-color, #009688);
       }
+      /* make `app-scrim` fixed in position when `fullbleed is applied to `app-drawer-layout`` */
+      app-drawer-layout::content app-scrim {
+        position: fixed !important;
+      }
 
       [drawer] app-toolbar {
         text-align: center;
@@ -54,19 +58,23 @@
       .nav-menu {
         background-color: var(--app-primary-color, #009688);
       }
-      a {
+      a, .pseudo-a {
         text-decoration: none;
         color: inherit;
         font-size: inherit;
       }
-      .nav-menu > a {
+      .nav-menu > a,
+      .nav-menu > .pseudo-a {
         display: block;
         padding: 12px 16px;
         font-size: 20px;
         font-weight: 500px;
       }
-      .nav-menu > a.iron-selected {
-        background-color: #fff;
+      .nav-menu > a.iron-selected,
+      .nav-menu > .pseudo-a.iron-selected {
+        background-color: #1DDB8B;
+        /*background-color: #1DDBD8;*/
+        color: #fff;
       }
 
 
