@@ -82,7 +82,7 @@ Example:
       </app-header-layout>
 
       <!-- main panel -->
-      <app-header-layout main has-scrolling-region>
+      <app-header-layout main>
         <app-header id="mainHeader" waterfall condenses>
           <!-- top toolbar -->
           <app-toolbar>
@@ -108,18 +108,17 @@ Example:
               </paper-tab>
             </paper-tabs>
           </app-toolbar>
-
         </app-header>
 
         <!-- <div class=""> -->
           <iron-pages selected="[[page]]" attr-for-selected="name">
+            <semafloor-profile-page name="profile"></semafloor-profile-page>
             <div name="main">
               <h1>Page One</h1>
               <p>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam necessitatibus modi corporis dolorem unde laudantium veritatis dignissimos tenetur, soluta qui adipisci odio. Numquam accusantium dolorem, quisquam voluptatem maxime animi recusandae ipsam fugiat velit at dolores veniam? Ad nihil harum numquam unde soluta consequuntur quia minus ipsam corrupti repellat autem voluptatibus error, nemo cupiditate, est perspiciatis, modi sequi quae quibusdam cumque quo eligendi odit! Autem ut fugit illum, modi consequatur officia inventore! Fugiat, veritatis. Quo ullam, similique, earum, obcaecati, impedit voluptas exercitationem in architecto magnam blanditiis quasi distinctio. Asperiores distinctio magnam officiis ad, veniam sed ipsum velit, obcaecati tenetur quod vitae voluptates, explicabo accusamus nobis adipisci. Quibusdam ab, nulla labore eaque magni debitis consequatur dolor necessitatibus neque ipsam optio, blanditiis ratione aut, quas corporis culpa odio consectetur non? Nisi pariatur, earum est blanditiis repellendus obcaecati libero sequi. Ratione at, eum tenetur maxime, molestias saepe suscipit aperiam adipisci voluptatibus, amet soluta eaque consequuntur omnis. A distinctio odit dolorem neque libero cumque sit quis, sed ipsum exercitationem, aliquid voluptates cupiditate autem magnam numquam illum! Et iusto at quisquam adipisci laborum, ratione modi sequi, nostrum delectus repellendus minima dicta repudiandae alias nulla, cumque quam aliquam. Aliquid saepe quae voluptatibus, hic earum animi dignissimos molestias qui nisi excepturi rerum distinctio, modi similique quo officiis officia! Error distinctio rerum, dolor voluptatum corporis fuga culpa perspiciatis eligendi tenetur magnam ab dolorem omnis cum dolorum hic autem possimus, temporibus accusamus doloribus, adipisci placeat! Odio excepturi, dolore quod quasi numquam eum sequi voluptate vel harum laborum ipsum accusantium. At quaerat nemo optio iure nostrum architecto aliquam praesentium, eum suscipit ea ipsam mollitia laboriosam ducimus porro ab. Officiis et cumque doloremque rem esse tenetur similique delectus explicabo, aut magnam vero iusto hic debitis error repellendus temporibus veritatis laudantium quas! At tenetur ducimus sed porro dolore odit, aliquid explicabo facere dolorum.
               </p>
             </div>
-            <semafloor-profile-page name="profile"></semafloor-profile-page>
             <semafloor-search-page name="search"></semafloor-search-page>
             <semafloor-reserve-page id="reservePage" name="reserve" page="[[_reserveTabs]]" today-count="{{_todayCount}}" thisweek-count="{{_thisweekCount}}" upcoming-count="{{_upcomingCount}}"></semafloor-reserve-page>
             <semafloor-current-page name="current"></semafloor-current-page>
@@ -145,7 +144,7 @@ Example:
       },
       page: {
         type: String,
-        value: 'room'
+        value: 'profile'
       },
 
       _todayCount: Number,

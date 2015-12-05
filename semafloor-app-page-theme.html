@@ -17,8 +17,8 @@
 
         display: block;
         @apply(--paper-font-common-base);
-        @apply(--layout-vertical);
-        @apply(--layout-flex-auto);
+        /*@apply(--layout-vertical);
+        @apply(--layout-flex-auto);*/
       }
 
       *, *::before, *::after {
@@ -26,6 +26,17 @@
         box-sizing: border-box;
       }
 
+      /* to make layout flex (for room-page) */
+      app-header-layout::content > #contentContainer {
+        /*@apply(--layout);
+        @apply(--layout-flex-auto);*/
+      }
+      iron-pages {
+        /*@apply(--layout);
+        @apply(--layout-flex-auto);*/
+      }
+
+      /* separator */
       app-drawer-layout {
         --app-drawer-background-color: var(--app-primary-color, #009688);
       }
@@ -58,15 +69,6 @@
         background-color: #fff;
       }
 
-      /* to make layout flex (for room-page) */
-      app-header-layout::content > #contentContainer {
-        @apply(--layout);
-        @apply(--layout-flex-auto);
-      }
-      iron-pages {
-        @apply(--layout);
-        @apply(--layout-flex-auto);
-      }
 
       /* semafloor-reserve-page styling */
       paper-tab span {
@@ -84,8 +86,8 @@
 
       /* semafloor-room-page styling */
       semafloor-room-page {
-        @apply(--layout);
-        @apply(--layout-flex-auto);
+        /*@apply(--layout);
+        @apply(--layout-flex-auto);*/
       }
 
 
