@@ -61,16 +61,16 @@ Example:
 
         <!-- nav menu -->
         <iron-selector class="nav-menu" selected="[[category]]" attr-for-selected="name" on-tap="_switchPage">
-          <div class="pseudo-a" name="profile">My Profile</div>
+          <!-- <div class="pseudo-a" name="profile">My Profile</div>
           <div class="pseudo-a" name="reserve">My Reservations</div>
           <div class="pseudo-a" name="search">Search &amp; Reserve</div>
           <div class="pseudo-a" name="current">Current Reservations</div>
-          <div class="pseudo-a" name="room">Room Information</div>
-          <!-- <a name="profile" href="/profile/list" on-tap="_switchPage">My Profile</a>
+          <div class="pseudo-a" name="room">Room Information</div> -->
+          <a name="profile" href="/profile/list" on-tap="_switchPage">My Profile</a>
           <a name="reserve" href="/reserve/list">My Reservations</a>
           <a name="search" href="/search/list">Search &amp; Reserve</a>
           <a name="current" href="/current/list">Current Reservations</a>
-          <a name="room" href="/room/list">Room Information</a> -->
+          <a name="room" href="/room/list">Room Information</a>
         </iron-selector>
       </app-header-layout>
 
@@ -150,7 +150,10 @@ Example:
         type: String,
         value: 'today'
       },
-      _pageTitle: String,
+      _pageTitle: {
+        type: String,
+        value: 'My Profile'
+      },
       /**
        * Signal to the outside world that this element
        * has been upgraded. Set in ready.
