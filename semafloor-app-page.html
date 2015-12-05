@@ -220,8 +220,11 @@ Example:
     },
 
     _isReservePage: function (_page, _isReserve) {
-      console.log(_page);
-      console.log('haha');
+      console.log('is-reserve-page: ' + _page);
+      // always update page title.
+      var _pageIdx = _pageTitlesCodes.indexOf(_page);
+      this.set('_pageTitle', _pageTitles[_pageIdx]);
+
       return _page !== _isReserve;
     },
 
