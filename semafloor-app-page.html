@@ -86,8 +86,8 @@ Example:
 
           <!-- bottom toolbar -->
           <app-toolbar>
-            <span hidden$="[[!_isReservePage(page, 'reserve')]]">[[_pageTitle]]</span>
-            <paper-tabs bottom-item selected="{{_reserveTabs}}" attr-for-selected="name" on-iron-deselect="_onIronDeselect" hidden$="[[_isReservePage(page, 'reserve')]]">
+            <span hidden$="[[!_isReservePage(page)]]">[[_pageTitle]]</span>
+            <paper-tabs bottom-item selected="{{_reserveTabs}}" attr-for-selected="name" on-iron-deselect="_onIronDeselect" hidden$="[[_isReservePage(page)]]">
               <paper-tab name="today">
                 <span id="todayTab">today</span>
                 <paper-badge for="todayTab" label="[[_todayCount]]"></paper-badge>
@@ -220,13 +220,17 @@ Example:
       this.$.reservePage.hideOverflow();
     },
 
-    _isReservePage: function (_page, _isReserve) {
+    _isReservePage: function (_page) {
       console.log('is-reserve-page: ' + _page);
       // always update page title.
       var _pageIdx = _pageTitlesCodes.indexOf(_page);
       this.set('_pageTitle', _pageTitles[_pageIdx]);
       // set attr `has-scrolling-region` if it is a reserve page.
-      this.set('_hasScroller', _page !== _isReserve);
+      this.set('_hasScroller', _page === 'reserve');
+      // fire `iron-resize` at reseve page.
+      if (_page === 'reserve') {
+        this.$.reservePage.fireIronResizeOnPageSwitch();
+      }
 
       return _page !== _isReserve;
     },
