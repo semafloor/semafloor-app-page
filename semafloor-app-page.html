@@ -224,8 +224,10 @@ Example:
       // always update page title.
       var _pageIdx = _pageTitlesCodes.indexOf(_page);
       this.set('_pageTitle', _pageTitles[_pageIdx]);
-      // fire `iron-resize` at reseve page.
       if (_page === 'reserve') {
+        // update position of #selectionBar inside `paper-tabs` when it becomes visible from hidden.
+        this.$.reserveTabs.notifyResize();
+        // fire `iron-resize` at reserve page.
         this.$.reservePage.fireIronResizeOnPageSwitch();
       }
 
@@ -244,7 +246,7 @@ Example:
         var _pageIdx = _pageTitlesCodes.indexOf(_name);
         // set page title as switching to a page.
         this.set('_pageTitle', _pageTitles[_pageIdx]);
-        // then, swtich page.
+        // then, switch page.
         this.$.ironPages.select(_name);
       }
     },
