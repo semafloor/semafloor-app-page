@@ -46,7 +46,7 @@ Example:
   <template strip-whitespace>
     <style include="semafloor-app-page-theme"></style>
 
-    <app-drawer-layout drawer-position="left" fullbleed>
+    <app-drawer-layout drawer-position="left">
 
       <!-- nav panel -->
       <app-header-layout drawer has-scrolling-region>
@@ -75,7 +75,7 @@ Example:
       </app-header-layout>
 
       <!-- main panel -->
-      <app-header-layout main has-scrolling-region$="[[_hasScroller]]">
+      <app-header-layout main>
         <app-header id="mainHeader" waterfall condenses>
           <!-- top toolbar -->
           <app-toolbar>
@@ -155,7 +155,6 @@ Example:
         type: String,
         value: 'My Profile'
       },
-      _hasScroller: Boolean,
       /**
        * Signal to the outside world that this element
        * has been upgraded. Set in ready.
@@ -225,8 +224,6 @@ Example:
       // always update page title.
       var _pageIdx = _pageTitlesCodes.indexOf(_page);
       this.set('_pageTitle', _pageTitles[_pageIdx]);
-      // set attr `has-scrolling-region` if it is a reserve page.
-      this.set('_hasScroller', _page === 'reserve');
       // fire `iron-resize` at reseve page.
       if (_page === 'reserve') {
         this.$.reservePage.fireIronResizeOnPageSwitch();
