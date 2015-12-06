@@ -75,7 +75,7 @@ Example:
       </app-header-layout>
 
       <!-- main panel -->
-      <app-header-layout main>
+      <app-header-layout main has-scrolling-region$="[[_hasScroller]]">
         <app-header id="mainHeader" waterfall condenses>
           <!-- top toolbar -->
           <app-toolbar>
@@ -141,7 +141,7 @@ Example:
       },
       page: {
         type: String,
-        value: 'profile'
+        value: 'reserve'
       },
 
       _todayCount: Number,
@@ -155,6 +155,7 @@ Example:
         type: String,
         value: 'My Profile'
       },
+      _hasScroller: Boolean,
       /**
        * Signal to the outside world that this element
        * has been upgraded. Set in ready.
@@ -224,6 +225,8 @@ Example:
       // always update page title.
       var _pageIdx = _pageTitlesCodes.indexOf(_page);
       this.set('_pageTitle', _pageTitles[_pageIdx]);
+      // set attr `has-scrolling-region` if it is a reserve page.
+      this.set('_hasScroller', _page !== _isReserve);
 
       return _page !== _isReserve;
     },
