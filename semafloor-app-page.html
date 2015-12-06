@@ -87,7 +87,7 @@ Example:
           <!-- bottom toolbar -->
           <app-toolbar>
             <span hidden$="[[!_isReservePage(page)]]">[[_pageTitle]]</span>
-            <paper-tabs bottom-item selected="{{_reserveTabs}}" attr-for-selected="name" on-iron-deselect="_onIronDeselect" hidden$="[[_isReservePage(page)]]">
+            <paper-tabs id="reserveTabs" bottom-item selected="{{_reserveTabs}}" attr-for-selected="name" on-iron-deselect="_onIronDeselect" hidden$="[[_isReservePage(page)]]">
               <paper-tab name="today">
                 <span id="todayTab">today</span>
                 <paper-badge for="todayTab" label="[[_todayCount]]"></paper-badge>
