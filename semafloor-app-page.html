@@ -87,7 +87,7 @@ Example:
           <!-- bottom toolbar -->
           <app-toolbar>
             <span hidden$="[[!_isReservePage(page)]]">[[_pageTitle]]</span>
-            <paper-tabs id="reserveTabs" bottom-item selected="{{_reserveTabs}}" attr-for-selected="name" on-iron-deselect="_onIronDeselect" hidden$="[[_isReservePage(page)]]">
+            <paper-tabs id="reserveTabs" bottom-item selected="{{_selectedTab}}" attr-for-selected="name" on-iron-deselect="_onIronDeselect" hidden$="[[_isReservePage(page)]]" on-transitionend="_setPage">
               <paper-tab name="today">
                 <span id="todayTab">today</span>
                 <paper-badge for="todayTab" label="[[_todayCount]]"></paper-badge>
@@ -115,7 +115,7 @@ Example:
               </p>
             </div>
             <semafloor-search-page name="search"></semafloor-search-page>
-            <semafloor-reserve-page id="reservePage" name="reserve" page="[[_reserveTabs]]" today-count="{{_todayCount}}" thisweek-count="{{_thisweekCount}}" upcoming-count="{{_upcomingCount}}"></semafloor-reserve-page>
+            <semafloor-reserve-page id="reservePage" name="reserve" page="[[_reserveTab]]" today-count="{{_todayCount}}" thisweek-count="{{_thisweekCount}}" upcoming-count="{{_upcomingCount}}"></semafloor-reserve-page>
             <semafloor-current-page name="current"></semafloor-current-page>
             <semafloor-room-page name="room"></semafloor-room-page>
           </iron-pages>
@@ -147,13 +147,21 @@ Example:
       _todayCount: Number,
       _thisweekCount: Number,
       _upcomingCount: Number,
-      _reserveTabs: {
+      _reserveTab: {
+        type: String,
+        value: 'today'
+      },
+      _selectedTab: {
         type: String,
         value: 'today'
       },
       _pageTitle: {
         type: String,
         value: 'My Profile'
+      },
+      _waitingCancel: {
+        type: Number,
+        value: 2
       },
       /**
        * Signal to the outside world that this element
@@ -216,7 +224,8 @@ Example:
 
     // hide page overflow when switching between pages.
     _onIronDeselect: function (ev) {
-      this.$.reservePage.hideOverflow();
+      // when switching to new page, show something when the list is loading.
+      this.set('_reserveTab', 'waiting');
     },
 
     _isReservePage: function (_page) {
@@ -232,6 +241,24 @@ Example:
       }
 
       return _page !== 'reserve';
+    },
+
+    _setPage: function (ev) {
+      // wait for transitionend from `paper-ripple`.
+      if (ev.target.tagName === 'PAPER-RIPPLE') {
+        var _waitingCancel = this._waitingCancel;
+        // decrement _waitingCancel for each transitionend.
+        _waitingCancel--;
+        // when this is the last transitionend from `paper-ripple`.
+        if (!_waitingCancel) {
+          // change tab.
+          this.set('_reserveTab', this._selectedTab);
+          // reset _waitingCancel back to its default value.
+          _waitingCancel = 2;
+        }
+        // write back the value of _waitingCancel.
+        this._waitingCancel = _waitingCancel;
+      }
     },
 
     _switchPage: function (ev) {
